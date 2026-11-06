@@ -13,3 +13,4 @@ Di website, sudah disiapkan:
 1. Galeri visual default yang estetik lengkap dengan caption ucapan wisuda & ultah.
 2. Fitur "Tambah Foto Mba Kei" langsung dari browser (bisa pilih foto langsung dari galeri HP / laptop tanpa perlu deploy ulang!).
 3. Lightbox zoom untuk melihat foto dalam ukuran penuh saat diklik.
+
