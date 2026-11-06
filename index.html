@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="rose">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Ulang Tahun, Mba Kei! ✨ — 7 November 2026</title>
+  <meta name="description" content="Website interaktif spesial perayaan ulang tahun Mba Kei pada 7 November 2026. Penuh kejutan, kue interaktif, balon harapan, dan kado misteri.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module">
+    if (!("popover" in HTMLElement.prototype)) {
+      import("https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js").catch(() => {});
+    }
+  </script>
+</head>
+<body>
+  <!-- Fullscreen Interactive Confetti & Fireworks Canvas -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Floating Click Sparkle Layer -->
+  <div id="click-sparkles" aria-hidden="true"></div>
+
+  <!-- Top Navigation & Quest Tracker -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-badge">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-title">Mba Kei’s Day</span>
+        <span class="brand-date">07.11.2026</span>
+      </div>
+
+      <nav class="quick-nav" aria-label="Navigasi Kejutan">
+        <ul>
+          <li><a href="#hero-section">Beranda</a></li>
+          <li><a href="#cake-section">Tiup Lilin</a></li>
+          <li><a href="#balloon-section">Balon Harapan</a></li>
+          <li><a href="#gifts-section">Kado Misteri</a></li>
+          <li><a href="#music-section">Kotak Musik</a></li>
+          <li><a href="#memory-section">Papan Ucapan</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" id="quest-badge-btn" class="quest-pill" popovertarget="quest-popover" aria-label="Lihat progres kejutan">
+          <span aria-hidden="true">👑</span>
+          <span>Kejutan: <strong id="quest-count">0</strong>/7</span>
+        </button>
+
+        <button type="button" id="theme-toggle-btn" class="icon-btn" aria-label="Ganti suasana warna">
+          <span id="theme-icon" aria-hidden="true">🌸</span>
+        </button>
+
+        <button type="button" id="bgm-toggle-btn" class="icon-btn" aria-pressed="false" aria-label="Putar musik ulang tahun">
+          <span id="bgm-icon" aria-hidden="true">🔇</span>
+          <span class="btn-label-sm">Musik</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Popover for Quest Progress (Non-modal top-layer overlay) -->
+  <div id="quest-popover" popover="auto" class="quest-popover-card" role="region" aria-labelledby="quest-popover-title">
+    <div class="popover-header">
+      <h2 id="quest-popover-title">Misi Kejutan Mba Kei ✨</h2>
+      <button type="button" class="popover-close-btn" data-close-popover="quest-popover" aria-label="Tutup daftar misi">✕</button>
+    </div>
+    <p class="popover-sub">Klik berbagai elemen di halaman ini untuk membuka semua 7 kejutan spesial 7 November 2026!</p>
+    <ul class="quest-checklist" id="quest-list">
+      <li data-quest="envelope"><span class="q-check" aria-hidden="true">○</span> Buka Surat Segel Emas</li>
+      <li data-quest="confetti"><span class="q-check" aria-hidden="true">○</span> Tembakkan Meriam Confetti</li>
+      <li data-quest="cake"><span class="q-check" aria-hidden="true">○</span> Tiup Semua Lilin Kue Ulang Tahun</li>
+      <li data-quest="balloon"><span class="q-check" aria-hidden="true">○</span> Pecahkan Minimal 3 Balon Harapan</li>
+      <li data-quest="gift"><span class="q-check" aria-hidden="true">○</span> Buka Kado Misteri Spesial</li>
+      <li data-quest="fortune"><span class="q-check" aria-hidden="true">○</span> Ambil Gulungan Doa dari Toples Bintang</li>
+      <li data-quest="music"><span class="q-check" aria-hidden="true">○</span> Mainkan Nada di Kotak Musik</li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- SECTION 1: HERO & INTERACTIVE ENVELOPE -->
+    <section id="hero-section" class="hero-section">
+      <div class="ambient-orb orb-1" aria-hidden="true"></div>
+      <div class="ambient-orb orb-2" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="edition-pill">
+            <span class="pulse-ring" aria-hidden="true"></span>
+            <span id="countdown-status-label">Edisi Spesial • Sabtu, 7 November 2026</span>
+          </div>
+
+          <h1 class="hero-title">
+            Selamat Ulang Tahun, <span class="highlight-name" id="interactive-name" tabindex="0" role="button" aria-label="Klik nama Mba Kei untuk kejutan bintang">Mba Kei!</span>
+          </h1>
+
+          <p class="hero-lead">
+            Hari ini semesta merayakan seseorang yang kehadirannya selalu membawa hangat, tawa, dan energi baik. Klik di mana saja, tiup lilinnya, pecahkan balonnya, dan buka setiap kado kecil yang disiapkan khusus untukmu!
+          </p>
+
+          <!-- Live 7 November 2026 Time Capsule / Countdown Box -->
+          <div class="time-capsule-card" id="time-capsule-card">
+            <div class="capsule-header">
+              <span class="capsule-tag" id="capsule-mode-title">⏳ Momen Spesial 7 November 2026</span>
+              <button type="button" id="celebrate-now-btn" class="text-action-btn">Rayakan Sekarang 🎉</button>
+            </div>
+            <div class="countdown-grid" id="countdown-grid" aria-live="polite">
+              <div class="time-box" data-unit="days">
+                <span class="time-val" id="cd-days">00</span>
+                <span class="time-lbl">Hari</span>
+              </div>
+              <div class="time-box" data-unit="hours">
+                <span class="time-val" id="cd-hours">00</span>
+                <span class="time-lbl">Jam</span>
+              </div>
+              <div class="time-box" data-unit="minutes">
+                <span class="time-val" id="cd-mins">00</span>
+                <span class="time-lbl">Menit</span>
+              </div>
+              <div class="time-box" data-unit="seconds">
+                <span class="time-val" id="cd-secs">00</span>
+                <span class="time-lbl">Detik</span>
+              </div>
+            </div>
+            <p class="capsule-note" id="capsule-note">Klik kotak waktu di atas untuk memunculkan percikan bintang keberuntungan!</p>
+          </div>
+
+          <div class="hero-cta-row">
+            <button type="button" id="open-letter-btn" class="btn-primary">
+              <span aria-hidden="true">💌</span>
+              <span>Buka Surat Spesial Mba Kei</span>
+            </button>
+            <button type="button" id="mega-confetti-btn" class="btn-secondary">
+              <span aria-hidden="true">🎊</span>
+              <span>Hujani Confetti!</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive 3D Envelope & Floating Badges -->
+        <div class="hero-stage">
+          <div class="floating-sticker sticker-top-left" data-sticker-msg="Ratu 7 November 👑" tabindex="0" role="button" aria-label="Stiker mahkota Mba Kei">
+            <span aria-hidden="true">👑</span>
+            <span>Queen of Nov 7</span>
+          </div>
+          <div class="floating-sticker sticker-bottom-right" data-sticker-msg="1000% Positif Vibes ✨" tabindex="0" role="button" aria-label="Stiker bintang positif">
+            <span aria-hidden="true">🌟</span>
+            <span>Level Up Day!</span>
+          </div>
+
+          <div class="envelope-wrapper" id="envelope-card" tabindex="0" role="button" aria-label="Amplop surat ulang tahun Mba Kei, klik untuk membuka">
+            <div class="envelope-back"></div>
+            <div class="envelope-letter-preview">
+              <p class="preview-greeting">Untuk Mba Kei tersayang,</p>
+              <p class="preview-snippet">7 November 2026 menjadi saksi bertambahnya babak indah dalam hidupmu...</p>
+              <span class="preview-cta">Klik untuk baca surat lengkap →</span>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal" aria-hidden="true">
+              <span>KEI</span>
+            </div>
+          </div>
+          <p class="stage-hint">👆 Klik amplop bersegel atau stiker melayang di sekitarnya!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE BIRTHDAY CAKE & CANDLES -->
+    <section id="cake-section" class="section-block cake-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Ritual Ulang Tahun • Interaktif</span>
+          <h2>Tiup Lilin &amp; Potong Kue Mba Kei 🎂</h2>
+          <p>Setiap lilin menyimpan satu doa baik untuk Mba Kei. Klik satu per satu apinya untuk meniup, atau gunakan tombol tiup sekaligus!</p>
+        </div>
+
+        <div class="cake-playground">
+          <div class="cake-stage-card">
+            <div class="wish-meter">
+              <span>Lilin Ditiup: <strong id="candles-blown-count">0</strong> / 5</span>
+              <span id="cake-status-pill" class="status-badge">🔥 Semua Lilin Menyala</span>
+            </div>
+
+            <!-- Interactive SVG/CSS Cake -->
+            <div class="cake-illustration" id="cake-illustration">
+              <!-- Candles Row -->
+              <div class="candles-row" role="group" aria-label="Lilin ulang tahun Mba Kei">
+                <button type="button" class="candle-unit" data-candle="0" data-wish="Kesehatan prima & energi yang selalu penuh setiap hari 💪" aria-label="Lilin Pertama: Doa Kesehatan">
+                  <span class="flame" aria-hidden="true"></span>
+                  <span class="smoke" aria-hidden="true"></span>
+                  <span class="wick" aria-hidden="true"></span>
+                  <span class="candle-stick stick-1" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="candle-unit" data-candle="1" data-wish="Kebahagiaan tulus yang tak pernah putus & hati yang tenang 🌸" aria-label="Lilin Kedua: Doa Kebahagiaan">
+                  <span class="flame" aria-hidden="true"></span>
+                  <span class="smoke" aria-hidden="true"></span>
+                  <span class="wick" aria-hidden="true"></span>
+                  <span class="candle-stick stick-2" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="candle-unit" data-candle="2" data-wish="Rezeki yang berlimpah, berkah, dan mengalir dari arah tak terduga ✨" aria-label="Lilin Ketiga: Doa Rezeki">
+                  <span class="flame" aria-hidden="true"></span>
+                  <span class="smoke" aria-hidden="true"></span>
+                  <span class="wick" aria-hidden="true"></span>
+                  <span class="candle-stick stick-3" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="candle-unit" data-candle="3" data-wish="Semua mimpi dan rencana besar di usia baru terwujud satu per satu 🚀" aria-label="Lilin Keempat: Doa Impian">
+                  <span class="flame" aria-hidden="true"></span>
+                  <span class="smoke" aria-hidden="true"></span>
+                  <span class="wick" aria-hidden="true"></span>
+                  <span class="candle-stick stick-4" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="candle-unit" data-candle="4" data-wish="Dikelilingi orang-orang tulus yang selalu menyayangi & mendukung Mba Kei 💖" aria-label="Lilin Kelima: Doa Kasih Sayang">
+                  <span class="flame" aria-hidden="true"></span>
+                  <span class="smoke" aria-hidden="true"></span>
+                  <span class="wick" aria-hidden="true"></span>
+                  <span class="candle-stick stick-5" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <!-- Cake Tiers -->
+              <div class="cake-body" id="cake-body" tabindex="0" role="button" aria-label="Kue ulang tahun Mba Kei, klik untuk menambah taburan">
+                <div class="cake-topper">Happy Day, Mba Kei!</div>
+                <div class="cake-tier tier-top">
+                  <div class="frosting-drip"></div>
+                  <div class="strawberries" aria-hidden="true">
+                    <span>🍓</span><span>🍒</span><span>🍓</span><span>🍒</span><span>🍓</span>
+                  </div>
+                </div>
+                <div class="cake-tier tier-middle">
+                  <div class="frosting-drip"></div>
+                  <div class="sprinkle-band">7 NOVEMBER 2026</div>
+                </div>
+                <div class="cake-tier tier-bottom">
+                  <div class="frosting-drip"></div>
+                </div>
+                <div class="cake-plate"></div>
+              </div>
+            </div>
+
+            <!-- Live Candle Wish Bubble -->
+            <div class="candle-wish-banner" id="candle-wish-banner" aria-live="polite">
+              ✨ Klik salah satu api lilin di atas untuk melihat doa di dalamnya!
+            </div>
+
+            <!-- Controls for Cake -->
+            <div class="cake-controls">
+              <button type="button" id="blow-all-btn" class="btn-primary">
+                <span aria-hidden="true">💨</span>
+                <span>Tiup Semua Lilin</span>
+              </button>
+              <button type="button" id="mic-blow-btn" class="btn-secondary">
+                <span aria-hidden="true">🎙️</span>
+                <span id="mic-blow-label">Tiup Pakai Mikrofon</span>
+              </button>
+              <button type="button" id="slice-cake-btn" class="btn-secondary" disabled>
+                <span aria-hidden="true">🍰</span>
+                <span>Potong Kue Spesial</span>
+              </button>
+              <button type="button" id="relight-btn" class="btn-ghost">
+                <span aria-hidden="true">🔥</span>
+                <span>Nyalakan Lagi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE BALLOON POP SKY GARDEN -->
+    <section id="balloon-section" class="section-block balloon-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Langit Kejutan • Klik &amp; Pecahkan</span>
+          <h2>Taman Balon Harapan Mba Kei 🎈</h2>
+          <p>Setiap balon di bawah ini menyimpan kartu pujian, afirmasi, dan kejutan manis. Klik balonnya untuk memecahkannya!</p>
+        </div>
+
+        <div class="balloon-toolbar">
+          <div class="balloon-score">
+            <span>Balon Dipecahkan: <strong id="popped-count">0</strong></span>
+          </div>
+          <div class="balloon-actions">
+            <button type="button" id="spawn-balloons-btn" class="btn-secondary">
+              <span aria-hidden="true">🎈</span>
+              <span>Terbangkan Balon Baru</span>
+            </button>
+            <button type="button" id="pop-all-balloons-btn" class="btn-ghost">
+              <span aria-hidden="true">✨</span>
+              <span>Pecahkan Semua!</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="balloon-sky" id="balloon-sky" aria-label="Area balon interaktif">
+          <!-- Balloons injected dynamically by script.js -->
+        </div>
+
+        <!-- Revealed Balloon Message Display -->
+        <div class="popped-message-tray" id="popped-message-tray" aria-live="polite">
+          <span class="tray-icon" aria-hidden="true">💌</span>
+          <p id="popped-message-text">Belum ada balon yang dipecahkan. Ayo klik balon warna-warni di atas!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MYSTERY GIFT BOXES & WISH JAR -->
+    <section id="gifts-section" class="section-block gifts-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">6 Kado Spesial • 7 November 2026</span>
+          <h2>Buka Kado Misteri Untuk Mba Kei 🎁</h2>
+          <p>Ada 6 kotak kado yang sudah dibungkus rapi. Klik masing-masing kotak untuk membuka pita dan melihat kejutan di dalamnya!</p>
+        </div>
+
+        <div class="gifts-grid" id="gifts-grid">
+          <button type="button" class="gift-card" data-gift-index="0" aria-label="Buka Kado Nomor 1: Mahkota Hari Ini">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">🎁</div>
+            <h3>Kado #1</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+
+          <button type="button" class="gift-card" data-gift-index="1" aria-label="Buka Kado Nomor 2: Buket Bunga Abadi">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">🎀</div>
+            <h3>Kado #2</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+
+          <button type="button" class="gift-card" data-gift-index="2" aria-label="Buka Kado Nomor 3: Voucher Bahagia Tanpa Syarat">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">💝</div>
+            <h3>Kado #3</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+
+          <button type="button" class="gift-card" data-gift-index="3" aria-label="Buka Kado Nomor 4: Ramalan Bintang 7 November">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">🔮</div>
+            <h3>Kado #4</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+
+          <button type="button" class="gift-card" data-gift-index="4" aria-label="Buka Kado Nomor 5: Tiket Petualangan Impian">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">✈️</div>
+            <h3>Kado #5</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+
+          <button type="button" class="gift-card" data-gift-index="5" aria-label="Buka Kado Nomor 6: Piala Apresiasi Mba Kei">
+            <div class="gift-ribbon" aria-hidden="true"></div>
+            <div class="gift-icon" aria-hidden="true">🏆</div>
+            <h3>Kado #6</h3>
+            <p class="gift-tag">Sentuh untuk buka ✨</p>
+          </button>
+        </div>
+
+        <!-- Interactive Jar of Star Wishes / Fortune Cookie -->
+        <div class="fortune-jar-banner">
+          <div class="jar-visual-wrap">
+            <button type="button" id="wish-jar-btn" class="wish-jar-btn" aria-label="Kocok dan ambil kertas doa dari toples bintang">
+              <span class="jar-glow" aria-hidden="true"></span>
+              <span class="jar-emoji" aria-hidden="true">🫙</span>
+              <span class="jar-stars" aria-hidden="true">✨⭐🌟</span>
+              <span class="jar-cta-badge">Klik Toples!</span>
+            </button>
+          </div>
+          <div class="jar-content">
+            <h3>Toples Bintang &amp; Kapsul Keberuntungan Mba Kei 🌟</h3>
+            <p>Butuh suntikan semangat atau doa manis hari ini? Klik toples bintang atau tombol di bawah untuk mengambil gulungan pesan acak yang ditulis khusus untuk Mba Kei!</p>
+            <div class="fortune-output" id="fortune-output" aria-live="polite">
+              <span class="fortune-quote">“Klik toples di samping untuk membuka gulungan bintang pertamamu!”</span>
+            </div>
+            <div class="jar-buttons">
+              <button type="button" id="draw-fortune-btn" class="btn-primary">
+                <span aria-hidden="true">📜</span>
+                <span>Ambil Gulungan Bintang</span>
+              </button>
+              <button type="button" id="cookie-crack-btn" class="btn-secondary">
+                <span aria-hidden="true">🥠</span>
+                <span>Buka Fortune Cookie</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: INTERACTIVE BIRTHDAY MUSIC BOX & SYNTH PIANO -->
+    <section id="music-section" class="section-block music-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Melodi Spesial • Web Audio Synthesizer</span>
+          <h2>Kotak Musik &amp; Kalimba Ulang Tahun 🎹</h2>
+          <p>Mainkan tuts kalimba pastel di bawah ini dengan klik atau tekan tombol angka <code>1</code>–<code>8</code> di keyboard, atau biarkan kotak musik memainkan lagu Selamat Ulang Tahun otomatis untuk Mba Kei!</p>
+        </div>
+
+        <div class="music-box-card">
+          <div class="music-controls-top">
+            <button type="button" id="autoplay-song-btn" class="btn-primary">
+              <span aria-hidden="true">🎵</span>
+              <span id="autoplay-song-label">Mainkan Lagu "Happy Birthday Mba Kei"</span>
+            </button>
+            <div class="note-display" id="note-display" aria-live="polite">
+              🎶 Siap dimainkan — Klik tuts di bawah!
+            </div>
+          </div>
+
+          <div class="kalimba-keys" role="group" aria-label="Tuts instrumen musik ulang tahun">
+            <button type="button" class="k-key" data-note="C4" data-freq="261.63" data-label="Do">
+              <span class="key-note">Do</span>
+              <span class="key-sub">1</span>
+            </button>
+            <button type="button" class="k-key" data-note="D4" data-freq="293.66" data-label="Re">
+              <span class="key-note">Re</span>
+              <span class="key-sub">2</span>
+            </button>
+            <button type="button" class="k-key" data-note="E4" data-freq="329.63" data-label="Mi">
+              <span class="key-note">Mi</span>
+              <span class="key-sub">3</span>
+            </button>
+            <button type="button" class="k-key" data-note="F4" data-freq="349.23" data-label="Fa">
+              <span class="key-note">Fa</span>
+              <span class="key-sub">4</span>
+            </button>
+            <button type="button" class="k-key" data-note="G4" data-freq="392.00" data-label="Sol">
+              <span class="key-note">Sol</span>
+              <span class="key-sub">5</span>
+            </button>
+            <button type="button" class="k-key" data-note="A4" data-freq="440.00" data-label="La">
+              <span class="key-note">La</span>
+              <span class="key-sub">6</span>
+            </button>
+            <button type="button" class="k-key" data-note="B4" data-freq="493.88" data-label="Si">
+              <span class="key-note">Si</span>
+              <span class="key-sub">7</span>
+            </button>
+            <button type="button" class="k-key" data-note="C5" data-freq="523.25" data-label="Do'">
+              <span class="key-note">Do'</span>
+              <span class="key-sub">8</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: POLAROID SCRAPBOOK & INTERACTIVE WALL OF WISHES -->
+    <section id="memory-section" class="section-block memory-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Galeri Apresiasi &amp; Doa • Klik Kartu untuk Balik</span>
+          <h2>Scrapbook &amp; Dinding Harapan Mba Kei 📸</h2>
+          <p>Klik kartu Polaroid di bawah untuk membalik dan membaca pesan rahasia di baliknya, atau tambahkan kartu ucapan &amp; stiker spesialmu sendiri!</p>
+        </div>
+
+        <!-- Interactive Polaroid Flip Cards -->
+        <div class="polaroid-grid">
+          <div class="polaroid-card" tabindex="0" role="button" aria-label="Kartu Polaroid 1: The Sunshine Person, klik untuk membalik">
+            <div class="polaroid-inner">
+              <div class="polaroid-front">
+                <div class="polaroid-art art-1">
+                  <span class="art-emoji" aria-hidden="true">🌷</span>
+                  <span class="art-date">07.11.2026</span>
+                </div>
+                <h3>Si Paling Hangat &amp; Tulus</h3>
+                <p class="flip-hint">Klik untuk balik ↻</p>
+              </div>
+              <div class="polaroid-back">
+                <h3>Untuk Mba Kei 🌸</h3>
+                <p>“Terima kasih sudah menjadi pribadi yang selalu membawa ketenangan dan senyuman hangat buat sekitar. Semoga kebaikan yang Mba Kei tabur kembali berlipat ganda!”</p>
+                <span class="back-stamp">7 Nov 2026 ✨</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="polaroid-card" tabindex="0" role="button" aria-label="Kartu Polaroid 2: Main Character Energy, klik untuk membalik">
+            <div class="polaroid-inner">
+              <div class="polaroid-front">
+                <div class="polaroid-art art-2">
+                  <span class="art-emoji" aria-hidden="true">👑</span>
+                  <span class="art-date">QUEEN EDITION</span>
+                </div>
+                <h3>Main Character 7 November</h3>
+                <p class="flip-hint">Klik untuk balik ↻</p>
+              </div>
+              <div class="polaroid-back">
+                <h3>Terus Bersinar! 🌟</h3>
+                <p>“Di babak usia yang baru ini, semoga Mba Kei semakin percaya diri melangkah, makin bersinar, dan semua pintu kesempatan terbaik terbuka lebar.”</p>
+                <span class="back-stamp">Slay All Year 💖</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="polaroid-card" tabindex="0" role="button" aria-label="Kartu Polaroid 3: Unstoppable Dreams, klik untuk membalik">
+            <div class="polaroid-inner">
+              <div class="polaroid-front">
+                <div class="polaroid-art art-3">
+                  <span class="art-emoji" aria-hidden="true">🦋</span>
+                  <span class="art-date">NEW CHAPTER</span>
+                </div>
+                <h3>Babak Baru Penuh Keajaiban</h3>
+                <p class="flip-hint">Klik untuk balik ↻</p>
+              </div>
+              <div class="polaroid-back">
+                <h3>Doa Terbaik 🤲</h3>
+                <p>“Semoga hal-hal yang selama ini Mba Kei doakan diam-diam segera dijawab dengan cara yang paling indah. Selamat ulang tahun, Mba Kei!”</p>
+                <span class="back-stamp">Happy 7 Nov 🎂</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Interactive Wish Wall Builder -->
+        <div class="wish-wall-Creator">
+          <div class="creator-card">
+            <h3>✍️ Tulis Kartu Ucapan Tambahan untuk Mba Kei</h3>
+            <p>Tambahkan pesan atau doa di dinding perayaan ini (tersimpan otomatis di browsermu!):</p>
+            <form id="wish-form" class="wish-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sender-name">Nama Pengirim</label>
+                  <input type="text" id="sender-name" name="sender" placeholder="Contoh: Sahabat / Tim / Keluarga" required maxlength="40" autocomplete="name">
+                </div>
+                <div class="form-group">
+                  <label for="wish-badge">Pilih Stiker</label>
+                  <select id="wish-badge" name="badge">
+                    <option value="💖">💖 Penuh Cinta</option>
+                    <option value="🎂">🎂 Kue Spesial</option>
+                    <option value="🌸">🌸 Bunga Musim Semi</option>
+                    <option value="👑">👑 Queen Mba Kei</option>
+                    <option value="🚀">🚀 Sukses Selalu</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="wish-message">Ucapan &amp; Doa untuk Mba Kei</label>
+                <textarea id="wish-message" name="message" rows="3" placeholder="Selamat ulang tahun Mba Kei! Semoga di tanggal 7 November 2026 ini..." required maxlength="280"></textarea>
+              </div>
+              <button type="submit" class="btn-primary">
+                <span aria-hidden="true">📌</span>
+                <span>Tempel ke Dinding Harapan &amp; Lepas Confetti!</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="user-wishes-wall" id="user-wishes-wall" aria-live="polite">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FLOATING INTERACTIVE CONFETTI DOCK -->
+  <aside class="floating-dock" aria-label="Kontrol Efek Interaktif">
+    <div class="dock-inner">
+      <button type="button" class="dock-btn" id="dock-cannon-btn" aria-label="Tembakkan Confetti">
+        <span class="dock-emoji" aria-hidden="true">🎉</span>
+        <span class="dock-text">Meriam Confetti</span>
+      </button>
+      <button type="button" class="dock-btn" id="dock-fireworks-btn" aria-label="Nyalakan Kembang Api">
+        <span class="dock-emoji" aria-hidden="true">🎆</span>
+        <span class="dock-text">Kembang Api</span>
+      </button>
+      <button type="button" class="dock-btn" id="dock-shape-btn" aria-label="Ganti Bentuk Partikel">
+        <span class="dock-emoji" id="dock-shape-emoji" aria-hidden="true">✨</span>
+        <span class="dock-text" id="dock-shape-label">Mode: Mix</span>
+      </button>
+      <button type="button" class="dock-btn" id="dock-letter-btn" aria-label="Buka Surat Ulang Tahun">
+        <span class="dock-emoji" aria-hidden="true">💌</span>
+        <span class="dock-text">Surat Mba Kei</span>
+      </button>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">Dibuat dengan penuh sukacita khusus untuk <strong>Mba Kei</strong> ✨</p>
+      <p class="footer-sub">Perayaan Spesial 7 November 2026 • Klik di mana saja untuk terus menyebarkan bintang!</p>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: SURAT SPESIAL MBA KEI (Native <dialog closedby="any">) -->
+  <dialog id="letter-dialog" class="luxury-dialog" closedby="any" aria-labelledby="letter-dialog-title">
+    <div class="dialog-card letter-paper">
+      <div class="dialog-top-bar">
+        <span class="letter-date-stamp">Sabtu, 7 November 2026</span>
+        <form method="dialog">
+          <button type="submit" value="close" class="dialog-close-icon" aria-label="Tutup surat">✕</button>
+        </form>
+      </div>
+
+      <h2 id="letter-dialog-title" class="letter-heading">Selamat Ulang Tahun, Mba Kei! 🌷✨</h2>
+
+      <div class="letter-body">
+        <p>Hai <strong>Mba Kei</strong>,</p>
+        <p>
+          Selamat menyambut tanggal <strong>7 November 2026</strong> dengan senyuman paling cerah! Hari ini bukan sekadar pergantian angka di kalender, melainkan perayaan atas betapa berharganya kehadiran Mba Kei bagi banyak orang di sekitarmu.
+        </p>
+        <p>
+          Terima kasih sudah selalu menjadi sosok yang hangat, penuh perhatian, kuat melewati berbagai musim kehidupan, dan tetap menyebarkan energi positif ke mana pun Mba Kei melangkah.
+        </p>
+        <p>
+          Di usia dan babak baru ini, semoga Tuhan senantiasa melimpahkan kesehatan yang paripurna, kebahagiaan yang tak lekang oleh waktu, rezeki yang luas dan penuh berkah, serta kemudahan dalam setiap langkah menuju impian-impian besarmu.
+        </p>
+        <p class="letter-signoff">
+          Tetaplah menjadi Mba Kei yang luar biasa. Selamat merayakan harimu! 🎂🥂💖
+        </p>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" id="letter-confetti-btn" class="btn-primary">
+          <span aria-hidden="true">🎊</span>
+          <span>Rayakan &amp; Tabur Bunga!</span>
+        </button>
+        <form method="dialog">
+          <button type="submit" value="close" class="btn-secondary" autofocus>Simpan di Hati 💖</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 2: DYNAMIC SURPRISE / GIFT / CAKE WISH DIALOG -->
+  <dialog id="surprise-dialog" class="luxury-dialog" closedby="any" aria-labelledby="surprise-dialog-title">
+    <div class="dialog-card surprise-modal-card">
+      <div class="dialog-top-bar">
+        <span class="surprise-badge" id="surprise-modal-badge">Kejutan Spesial</span>
+        <form method="dialog">
+          <button type="submit" value="close" class="dialog-close-icon" aria-label="Tutup kejutan">✕</button>
+        </form>
+      </div>
+
+      <div class="surprise-emoji-stage" id="surprise-modal-emoji" aria-hidden="true">🎁</div>
+      <h2 id="surprise-dialog-title" class="surprise-heading">Kado Terbuka!</h2>
+      <p id="surprise-modal-desc" class="surprise-desc"></p>
+
+      <div class="surprise-voucher-box" id="surprise-voucher-box">
+        <span class="voucher-label">KODE SPESIAL 7 NOV 2026:</span>
+        <code id="surprise-voucher-code">MBA-KEI-BAHAGIA-SELALU</code>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" id="surprise-more-confetti-btn" class="btn-primary">
+          <span aria-hidden="true">✨</span>
+          <span>Klaim Kejutan!</span>
+        </button>
+        <form method="dialog">
+          <button type="submit" value="close" class="btn-secondary" autofocus>Tutup</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+
