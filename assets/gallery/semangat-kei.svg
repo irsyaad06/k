@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" rx="36" fill="url(#grad3)"/>
+  <!-- Trophy & Star -->
+  <g transform="translate(300, 270)">
+    <path d="M-65,-80 L65,-80 L50,0 C45,45 20,70 0,75 C-20,70 -45,45 -50,0 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="4"/>
+    <path d="M-60,-65 C-95,-65 -95,-15 -50,-10" fill="none" stroke="#fef08a" stroke-width="8" stroke-linecap="round"/>
+    <path d="M60,-65 C95,-65 95,-15 50,-10" fill="none" stroke="#fef08a" stroke-width="8" stroke-linecap="round"/>
+    <rect x="-15" y="75" width="30" height="40" fill="#eab308"/>
+    <rect x="-55" y="115" width="110" height="30" rx="8" fill="#713f12"/>
+    <text x="0" y="5" font-size="34" text-anchor="middle">👑</text>
+  </g>
+  <text x="300" y="475" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="26" fill="#ffffff" text-anchor="middle">ORANG RAJIN &amp; SUPER SABAR</text>
+  <text x="300" y="515" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="19" fill="#a7f3d0" text-anchor="middle">Mba Kei yang Luar Biasa Banget! 💪✨</text>
+</svg>

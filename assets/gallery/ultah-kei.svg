@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="50%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" rx="36" fill="url(#grad2)"/>
+  <!-- Birthday Cake & Candles -->
+  <g transform="translate(300, 280)">
+    <!-- Plate -->
+    <ellipse cx="0" cy="110" rx="160" ry="24" fill="#ffffff" opacity="0.9"/>
+    <!-- Bottom tier -->
+    <rect x="-120" y="20" width="240" height="85" rx="16" fill="#fdf2f8"/>
+    <path d="M-120,20 Q-90,45 -60,20 Q-30,45 0,20 Q30,45 60,20 Q90,45 120,20 L120,50 L-120,50 Z" fill="#f472b6"/>
+    <!-- Top tier -->
+    <rect x="-80" y="-45" width="160" height="68" rx="14" fill="#fce7f3"/>
+    <path d="M-80,-45 Q-55,-25 -30,-45 Q-5,-25 20,-45 Q45,-25 80,-45 L80,-25 L-80,-25 Z" fill="#fb7185"/>
+    <!-- Candle -->
+    <rect x="-8" y="-95" width="16" height="50" rx="6" fill="#fef08a"/>
+    <!-- Flame -->
+    <path d="M0,-125 C-12,-105 -8,-95 0,-95 C8,-95 12,-105 0,-125 Z" fill="#f97316"/>
+    <circle cx="0" cy="-105" r="5" fill="#fef08a"/>
+    <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="16" fill="#be185d" text-anchor="middle">07 NOV 2026</text>
+  </g>
+  <text x="300" y="480" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" fill="#ffffff" text-anchor="middle" letter-spacing="1">DOUBLE CELEBRATION!</text>
+  <text x="300" y="520" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="20" fill="#fed7aa" text-anchor="middle">Ultah 7 Nov + Wisuda Mba Kei 🎂🎉</text>
+</svg>

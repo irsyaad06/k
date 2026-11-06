@@ -782,6 +782,345 @@ button:disabled {
   text-align: center;
 }
 
+/* SECTION: PENGINGAT AL-INSYIRAH (SETELAH SEMPIT ADA KEMUDAHAN) */
+.insyirah-section {
+  position: relative;
+}
+
+.insyirah-card {
+  position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 1.85rem;
+  padding: 2.5rem 1.85rem;
+  max-width: 860px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.insyirah-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.verse-unit {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--bg-card-solid);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.35rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease;
+}
+
+.verse-unit:hover {
+  transform: translateY(-3px);
+}
+
+.verse-badge {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-primary);
+  margin-bottom: 0.85rem;
+}
+
+.arabic-text {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: clamp(2rem, 4.2vw, 2.75rem);
+  line-height: 2;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+  direction: rtl;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.transliteration {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.12rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.45rem;
+}
+
+.translation {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.verse-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.divider-icon {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  background: var(--accent-soft);
+  padding: 0.3rem 0.95rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.insyirah-reflection {
+  margin-top: 1.85rem;
+  background: var(--bg-card-solid);
+  border-left: 4.5px solid var(--accent-primary);
+  border-radius: 1.25rem;
+  padding: 1.65rem 1.75rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.insyirah-reflection h3 {
+  font-size: 1.28rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.insyirah-reflection p {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.9rem;
+}
+
+.reflection-cta {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* SECTION: GALERI KEI (WISUDA & ULTAH MOMENTS) */
+.gallery-section {
+  position: relative;
+}
+
+.gallery-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-info {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: var(--bg-card-solid);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+}
+
+.upload-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-card {
+  background: var(--bg-card-solid);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 1.45rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.25s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.gallery-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.gallery-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.gallery-card:hover .gallery-frame img {
+  transform: scale(1.08);
+}
+
+.gallery-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-desc {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gallery-desc h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.gallery-desc p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.65rem;
+  flex: 1;
+}
+
+.gallery-hint {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.gallery-footer-note {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 0.85rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px dashed var(--border-subtle);
+}
+
+/* Lightbox Modal */
+.lightbox-dialog {
+  max-width: 640px;
+}
+
+.lightbox-card {
+  text-align: center;
+}
+
+.lightbox-img-wrapper {
+  max-height: 60vh;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  background: #000000;
+}
+
+.lightbox-img-wrapper img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption {
+  font-size: 1.15rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* Letter dialog quotes & mini verses */
+.letter-quote-box {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent-primary);
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.85rem;
+  margin: 0.35rem 0;
+}
+
+.letter-verse-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.arabic-mini {
+  font-family: 'Amiri', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  direction: rtl;
+  margin-bottom: 0.25rem;
+}
+
+.verse-mini-sub {
+  font-size: 0.82rem;
+  color: var(--accent-primary);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.verse-mini-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
 /* SECTION 2: CAKE & CANDLES */
 .cake-stage-card {
   background: var(--bg-card);

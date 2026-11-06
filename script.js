@@ -85,7 +85,7 @@
   });
 
   /* ==========================================================================
-     2. WEB AUDIO SYNTHESIZER (Chimes, Pops, Fanfare & Birthday Melody)
+     2. WEB AUDIO SYNTHESIZER (Chimes, Pops, Fanfare & Melodies)
      ========================================================================== */
   let audioCtx = null;
   function getAudioContext() {
@@ -182,26 +182,32 @@
         launchFireworksShow();
         openSurpriseModal({
           badge: '🏆 Semua 7 Kejutan Terbuka!',
-          emoji: '👑',
-          title: 'Grand Queen of 7 November 2026!',
-          desc: 'Luar biasa, Mba Kei! Kamu sudah menjelajahi seluruh 7 kejutan interaktif di halaman ini. Semoga tahun barumu penuh dengan keajaiban, tawa, dan berkah tanpa henti!',
-          code: 'QUEEN-KEI-07112026-VIP',
+          emoji: '🎓',
+          title: 'Queen of Graduation & 7 November 2026!',
+          desc: 'Keren banget Mba Kei! Semua 7 kejutan interaktif udah kamu buka. Orang yang rajin, sabar, dan luar biasa kayak kamu pasti bakal terus bersinar di dunia dan mulia di akhirat!',
+          code: 'KEI-WISUDA-ULTAH-2026-CHAMPION',
         });
       }, 600);
     }
   }
 
   /* ==========================================================================
-     4. CUSTOM CANVAS CONFETTI & FIREWORKS ENGINE
+     4. CUSTOM CANVAS CONFETTI & FIREWORKS ENGINE (WITH TOGA PARTICLES)
      ========================================================================== */
   const canvas = document.getElementById('confetti-canvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
   let animFrameId = null;
 
-  const shapeModes = ['mix', 'hearts', 'stars', 'petals'];
-  const shapeEmojis = { mix: '✨', hearts: '💖', stars: '⭐', petals: '🌸' };
-  const shapeLabels = { mix: 'Mode: Mix', hearts: 'Mode: Hati', stars: 'Mode: Bintang', petals: 'Mode: Sakura' };
+  const shapeModes = ['toga', 'mix', 'hearts', 'stars', 'petals'];
+  const shapeEmojis = { toga: '🎓', mix: '✨', hearts: '💖', stars: '⭐', petals: '🌸' };
+  const shapeLabels = {
+    toga: 'Mode: Toga Wisuda 🎓',
+    mix: 'Mode: Mix ✨',
+    hearts: 'Mode: Hati 💖',
+    stars: 'Mode: Bintang ⭐',
+    petals: 'Mode: Sakura 🌸'
+  };
   let currentShapeModeIndex = 0;
 
   const palettes = [
@@ -219,10 +225,11 @@
 
   function pickParticleShape() {
     const mode = shapeModes[currentShapeModeIndex];
+    if (mode === 'toga') return 'toga';
     if (mode === 'hearts') return 'heart';
     if (mode === 'stars') return 'star';
     if (mode === 'petals') return 'petal';
-    const all = ['rect', 'circle', 'heart', 'star', 'petal'];
+    const all = ['rect', 'circle', 'heart', 'star', 'petal', 'toga'];
     return all[Math.floor(Math.random() * all.length)];
   }
 
@@ -235,7 +242,7 @@
         y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - Math.random() * 4,
-        size: Math.random() * 7 + 5,
+        size: Math.random() * 8 + 6,
         color: palettes[Math.floor(Math.random() * palettes.length)],
         rotation: Math.random() * Math.PI * 2,
         vRot: (Math.random() - 0.5) * 0.18,
@@ -254,7 +261,7 @@
   function launchSideCannons() {
     const h = window.innerHeight;
     const w = window.innerWidth;
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 70; i++) {
       const fromLeft = i % 2 === 0;
       const angle = fromLeft
         ? -Math.PI / 3 + (Math.random() - 0.5) * 0.45
@@ -265,7 +272,7 @@
         y: h * 0.78,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
-        size: Math.random() * 8 + 5,
+        size: Math.random() * 9 + 6,
         color: palettes[Math.floor(Math.random() * palettes.length)],
         rotation: Math.random() * Math.PI * 2,
         vRot: (Math.random() - 0.5) * 0.22,
@@ -329,6 +336,22 @@
     ctx.fill();
   }
 
+  function drawToga(ctx, size) {
+    const s = size * 0.7;
+    // Diamond cap
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.lineTo(s * 1.4, -s * 0.2);
+    ctx.lineTo(0, s * 0.6);
+    ctx.lineTo(-s * 1.4, -s * 0.2);
+    ctx.closePath();
+    ctx.fill();
+    // Cap base
+    ctx.beginPath();
+    ctx.arc(0, s * 0.2, s * 0.6, 0, Math.PI);
+    ctx.fill();
+  }
+
   function renderParticles() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -367,6 +390,8 @@
         drawHeart(ctx, p.size);
       } else if (p.shape === 'star') {
         drawStar(ctx, p.size);
+      } else if (p.shape === 'toga') {
+        drawToga(ctx, p.size);
       }
 
       ctx.restore();
@@ -386,18 +411,19 @@
   }
 
   /* ==========================================================================
-     5. CLICK ANYWHERE FLOATING WORDS & SPARKLE BURST
+     5. CLICK ANYWHERE FLOATING WORDS & SPARKLE BURST (NYANTAI & WARM)
      ========================================================================== */
   const clickSparklesLayer = document.getElementById('click-sparkles');
   const floatingPhrases = [
-    'HBD Mba Kei! ✨',
-    '7 Nov 2026 🎂',
-    'Bahagia Selalu 💖',
-    'Queen of Nov 7 👑',
-    'Sehat & Berkah 🌸',
-    'Makin Bersinar 🌟',
-    'Wish Granted! 🪄',
-    'Slay Mba Kei! 🥂'
+    'Happy Wisuda Mba Kei! 🎓',
+    'HBD 7 Nov 2026 🎂',
+    'Super Rajin & Sabar 💪',
+    'Fa inna ma\'al-\'usri yusra 🤍',
+    'Dunia & Akhirat Juara 🤲',
+    'Bangga Banget Sama Kamu! ✨',
+    'Officially Graduated! 🎓',
+    'Level Up Day! 🥂',
+    'Tetap Semangat Ya! 🌟'
   ];
   let phraseIdx = 0;
 
@@ -416,7 +442,7 @@
     const tag = e.target.tagName.toLowerCase();
     const isFormField = ['input', 'textarea', 'select'].includes(tag);
     if (isFormField) return;
-    createConfettiBurst(e.clientX, e.clientY, 14, 6.5);
+    createConfettiBurst(e.clientX, e.clientY, 15, 6.8);
     if (!e.target.closest('button, a, dialog, [popover]')) {
       spawnFloatingWord(e.clientX, e.clientY);
       playTone(587.33 + Math.random() * 220, 0.16, 'sine', 0.05);
@@ -445,9 +471,9 @@
       if (cdHours) cdHours.textContent = '11';
       if (cdMins) cdMins.textContent = '20';
       if (cdSecs) cdSecs.textContent = '26';
-      if (capsuleModeTitle) capsuleModeTitle.textContent = '🎉 HARI INI HARI ULANG TAHUN MBA KEI!';
-      if (capsuleNote) capsuleNote.textContent = 'Selamat merayakan 7 November 2026! Hari spesial milik Mba Kei sepenuhnya ✨';
-      if (statusLabel) statusLabel.textContent = 'Hari H Perayaan • Sabtu, 7 November 2026 🎉';
+      if (capsuleModeTitle) capsuleModeTitle.textContent = '🎓🎉 HARI H WISUDA & ULTAH MBA KEI!';
+      if (capsuleNote) capsuleNote.textContent = 'Selamat merayakan 7 November 2026! Hari bahagia resmi wisuda dan ultah milikmu sepenuhnya ✨';
+      if (statusLabel) statusLabel.textContent = '🎓 Double Celebration • Wisuda & Ultah 7 November 2026 🎉';
       return;
     }
 
@@ -463,9 +489,9 @@
     if (cdSecs) cdSecs.textContent = String(secs).padStart(2, '0');
 
     if (now < targetBirthdayStart) {
-      if (capsuleModeTitle) capsuleModeTitle.textContent = '⏳ Menuju 7 November 2026 (WIB)';
+      if (capsuleModeTitle) capsuleModeTitle.textContent = '⏳ Menuju Momen Emas 7 November 2026 (WIB)';
     } else {
-      if (capsuleModeTitle) capsuleModeTitle.textContent = '✨ Kenangan Manis Sejak 7 November 2026';
+      if (capsuleModeTitle) capsuleModeTitle.textContent = '✨ Kenangan Indah Sejak 7 November 2026';
     }
   }
 
@@ -482,7 +508,7 @@
     box.addEventListener('click', (e) => {
       const rect = box.getBoundingClientRect();
       createConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 28, 9);
-      spawnFloatingWord(e.clientX, e.clientY, '07 • 11 • 2026 ✨');
+      spawnFloatingWord(e.clientX, e.clientY, 'Wisuda & Ultah 2026 🎓✨');
       playSparkleChord();
     });
   });
@@ -522,21 +548,104 @@
   const interactiveName = document.getElementById('interactive-name');
   interactiveName?.addEventListener('click', (e) => {
     createConfettiBurst(e.clientX, e.clientY, 45, 11);
-    spawnFloatingWord(e.clientX, e.clientY, 'Mba Kei Terbaik! 👑');
+    spawnFloatingWord(e.clientX, e.clientY, 'Mba Kei Keren Banget! 🎓👑');
     playGrandFanfare();
   });
 
   document.querySelectorAll('.floating-sticker').forEach((sticker) => {
     sticker.addEventListener('click', (e) => {
-      const msg = sticker.getAttribute('data-sticker-msg') || 'HBD Mba Kei! ✨';
+      const msg = sticker.getAttribute('data-sticker-msg') || 'Congrats Mba Kei! 🎓';
       createConfettiBurst(e.clientX, e.clientY, 30, 9);
       spawnFloatingWord(e.clientX, e.clientY, msg);
       playSparkleChord();
     });
   });
 
+  // Al-Insyirah Card Blessing Action
+  document.getElementById('insyirah-bless-btn')?.addEventListener('click', (e) => {
+    launchFireworksShow();
+    playGrandFanfare();
+    spawnFloatingWord(e.clientX, e.clientY, 'Aamiin! Selalu Dimudahkan 🤲🤍');
+    completeQuest('fortune');
+  });
+
   /* ==========================================================================
-     8. INTERACTIVE BIRTHDAY CAKE, CANDLES & MICROPHONE BLOW
+     8. GALERI KEI (LIGHTBOX PREVIEW & LOCAL UPLOAD)
+     ========================================================================== */
+  const lightboxDialog = document.getElementById('gallery-lightbox-dialog');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxBadge = document.getElementById('lightbox-badge');
+
+  function openLightbox(src, caption, badgeText = 'Momen Mba Kei 🎓') {
+    if (!lightboxDialog || !lightboxImg) return;
+    lightboxImg.src = src;
+    if (lightboxTitle) lightboxTitle.textContent = caption || 'Momen Spesial Mba Kei';
+    if (lightboxBadge) lightboxBadge.textContent = badgeText;
+    lightboxDialog.showModal();
+    createConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 35, 10);
+    playSparkleChord();
+  }
+
+  function bindGalleryCard(card) {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-full-src') || card.querySelector('img')?.src;
+      const caption = card.getAttribute('data-caption') || card.querySelector('h3')?.textContent;
+      openLightbox(src, caption);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(bindGalleryCard);
+
+  document.getElementById('lightbox-cheer-btn')?.addEventListener('click', () => {
+    launchFireworksShow();
+  });
+
+  // Upload Local Photo Handler
+  const galleryInput = document.getElementById('gallery-file-input');
+  const galleryGrid = document.getElementById('gallery-grid');
+  galleryInput?.addEventListener('change', (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result;
+      if (!dataUrl || !galleryGrid) return;
+      const newCard = document.createElement('article');
+      newCard.className = 'gallery-card';
+      newCard.setAttribute('data-full-src', dataUrl);
+      newCard.setAttribute('data-caption', 'Momen Spesial Mba Kei — Wisuda & Ultah 7 November 2026 yang tak terlupakan! 💖🎓');
+      newCard.tabIndex = 0;
+      newCard.setAttribute('role', 'button');
+      newCard.setAttribute('aria-label', 'Foto Mba Kei yang diupload, klik untuk perbesar');
+
+      newCard.innerHTML = `
+        <div class="gallery-frame">
+          <img src="${dataUrl}" alt="Foto Mba Kei" loading="lazy">
+          <span class="gallery-tag">✨ Foto Baru</span>
+        </div>
+        <div class="gallery-desc">
+          <h3>Momen Berharga Mba Kei</h3>
+          <p>Potret indah kenangan wisuda & ulang tahun 7 November 2026.</p>
+          <span class="gallery-hint">Klik buat perbesar 🔍</span>
+        </div>
+      `;
+
+      bindGalleryCard(newCard);
+      galleryGrid.prepend(newCard);
+      launchSideCannons();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  /* ==========================================================================
+     9. INTERACTIVE BIRTHDAY CAKE, CANDLES & MICROPHONE BLOW
      ========================================================================== */
   const candles = document.querySelectorAll('.candle-unit');
   const blownCountEl = document.getElementById('candles-blown-count');
@@ -556,7 +665,7 @@
       launchFireworksShow();
       playGrandFanfare();
       if (candleWishBanner) {
-        candleWishBanner.textContent = '🌟 Semua 5 doa untuk Mba Kei telah diterbangkan ke langit! Sekarang kamu bisa memotong kuenya 🍰';
+        candleWishBanner.textContent = '🌟 Semua 5 doa wisuda & ultah buat Mba Kei udah diterbangkan ke langit! Yuk potong kuenya 🍰';
       }
     } else {
       if (cakeStatusPill) cakeStatusPill.textContent = `🔥 ${candles.length - blown} Lilin Masih Menyala`;
@@ -591,7 +700,7 @@
     candles.forEach((c) => c.classList.remove('blown'));
     cakeBody?.classList.remove('is-sliced');
     if (candleWishBanner) {
-      candleWishBanner.textContent = '✨ Lilin menyala kembali! Klik api lilin untuk meniup dan membaca doanya.';
+      candleWishBanner.textContent = '✨ Lilin menyala lagi! Klik apinya buat tiup dan baca doanya.';
     }
     updateCandleState();
     playSparkleChord();
@@ -601,17 +710,17 @@
     cakeBody?.classList.add('is-sliced');
     launchSideCannons();
     openSurpriseModal({
-      badge: '🍰 Potongan Pertama Untuk Mba Kei',
+      badge: '🍰 Potongan Kue Wisuda & Ultah',
       emoji: '🍰',
-      title: 'Kue Spesial 7 November 2026!',
-      desc: 'Potongan kue pertama dengan taburan stroberi manis resmi disajikan untuk Mba Kei! Semoga hari-harimu ke depan semanis kue ulang tahun ini.',
+      title: 'Kue Spesial Mba Kei!',
+      desc: 'Potongan kue pertama dengan taburan stroberi manis disajikan khusus buat Mba Kei yang rajin dan sabar. Semoga hari-harimu ke depan selalu semanis ini!',
       code: 'SWEET-KEI-SLICE-2026',
     });
   });
 
   cakeBody?.addEventListener('click', (e) => {
     createConfettiBurst(e.clientX, e.clientY, 26, 8);
-    spawnFloatingWord(e.clientX, e.clientY, 'Yummy! Kue Mba Kei 🍓');
+    spawnFloatingWord(e.clientX, e.clientY, 'Yummy! Kue Mba Kei 🍓🎓');
     playSparkleChord();
   });
 
@@ -658,7 +767,7 @@
       checkBlow();
     } catch {
       if (candleWishBanner) {
-        candleWishBanner.textContent = '💡 Akses mikrofon tidak diizinkan/tersedia — klik langsung lilinnya atau tombol "Tiup Semua Lilin" ya!';
+        candleWishBanner.textContent = '💡 Akses mikrofon tidak diizinkan/tersedia — klik langsung apinya atau tombol "Tiup Semua Lilin" ya!';
       }
     }
   }
@@ -675,7 +784,7 @@
   micBlowBtn?.addEventListener('click', toggleMicBlow);
 
   /* ==========================================================================
-     9. INTERACTIVE BALLOON POP SKY GARDEN
+     10. INTERACTIVE BALLOON POP SKY GARDEN
      ========================================================================== */
   const balloonSky = document.getElementById('balloon-sky');
   const poppedCountEl = document.getElementById('popped-count');
@@ -683,14 +792,14 @@
   let poppedTotal = 0;
 
   const balloonCompliments = [
-    '🎈 “Mba Kei itu definisi orang yang bikin suasana langsung adem dan nyaman!”',
-    '🎈 “Semoga di usia baru ini, saldo rekening & kebahagiaan Mba Kei sama-sama melimpah ruah!”',
-    '🎈 “7 November 2026 adalah awal dari tahun paling bersinar buat Mba Kei ✨”',
-    '🎈 “Terima kasih sudah jadi sosok yang sabar, tulus, dan menginspirasi banyak orang!”',
-    '🎈 “Semoga segala urusan, karier, dan impian Mba Kei dilancarkan tanpa hambatan 🚀”',
-    '🎈 “Jangan lupa istirahat dan rayakan dirimu sendiri hari ini ya, Mba Kei! 💖”',
-    '🎈 “Aura positif Mba Kei itu menular banget—tetap jadi diri sendiri yang keren!”',
-    '🎈 “Doa terbaik: sehat selalu, panjang umur, dan dikelilingi cinta yang tulus 🌸”'
+    '🎈 “Mba Kei itu orang yang super rajin dan sabar, respek banget sama kegigihannya!”',
+    '🎈 “Selamat wisuda Mba Kei! Gelar baru, peluang baru, dan masa depan yang cerah menantimu! 🎓”',
+    '🎈 “Fa inna ma\'al-\'usri yusra. Setelah sempit pasti ada kemudahan berlipat ganda 🤍”',
+    '🎈 “Semoga di usia baru ini, sukses dunia dan kemuliaan akhirat selalu Mba Kei raih! 🤲”',
+    '🎈 “Jarang banget ada orang sesabar dan setulus Mba Kei. Bangga banget sama kamu!”',
+    '🎈 “Di kondisi apa pun nanti, tetap semangat ya! Jangan pernah lupa betapa luar biasanya kamu 💪”',
+    '🎈 “7 November 2026: Dobel perayaan yang dirayakan se-unik mungkin khusus buat Mba Kei! 🎂”',
+    '🎈 “Doa tulus: sehat selalu, hati selalu tenang, rezeki melimpah, dan langkah selalu berkah 🌸”'
   ];
 
   const balloonGradients = [
@@ -702,7 +811,7 @@
     'linear-gradient(135deg, #f472b6, #db2777)'
   ];
 
-  const balloonIcons = ['💖', '✨', '👑', '🌸', '⭐', '🎂', '🦋', '🥂'];
+  const balloonIcons = ['🎓', '💖', '👑', '🌸', '⭐', '🎂', '💪', '🥂'];
 
   function spawnBalloons(count = 8) {
     if (!balloonSky) return;
@@ -759,7 +868,7 @@
   });
 
   /* ==========================================================================
-     10. MYSTERY GIFT BOXES & WISH JAR / FORTUNE COOKIE
+     11. MYSTERY GIFT BOXES & WISH JAR / FORTUNE COOKIE
      ========================================================================== */
   const surpriseDialog = document.getElementById('surprise-dialog');
   const surpriseBadge = document.getElementById('surprise-modal-badge');
@@ -770,45 +879,45 @@
 
   const giftsData = [
     {
-      badge: 'Kado Spesial #1',
+      badge: 'Kado Wisuda #1',
+      emoji: '🎓',
+      title: 'Toga Emas Kebanggaan',
+      desc: 'Selamat wisuda Mba Kei! Resmi menyandang gelar baru dengan kerja keras dan kesabaran tinggi. Pintu-pintu karier dan karya terbaik kini terbuka lebar buatmu!',
+      code: 'GRADUATION-HERO-KEI',
+    },
+    {
+      badge: 'Kado Karakter #2',
       emoji: '👑',
-      title: 'Mahkota Ratu 7 November',
-      desc: 'Hari ini Mba Kei resmi dinobatkan sebagai Ratu Utama tanggal 7 November 2026! Bebas pilih makanan favorit, bebas senyum seharian, dan wajib bahagia penuh!',
-      code: 'CROWN-FOR-MBA-KEI',
+      title: 'Mahkota Ratu Rajin & Sabar',
+      desc: 'Penghargaan tertinggi buat Mba Kei yang selalu tekun, sabar menghadapi proses, dan gak pernah gampang ngeluh. Kamu beneran orang yang sangat luar biasa!',
+      code: 'PATIENT-QUEEN-KEI',
     },
     {
-      badge: 'Kado Spesial #2',
-      emoji: '💐',
-      title: 'Buket Bunga Abadi',
-      desc: 'Sebuket bunga virtual yang tidak akan pernah layu—melambangkan doa-doa baik dan rasa sayang dari orang-orang terdekat yang selalu mekar untuk Mba Kei.',
-      code: 'ETERNAL-BLOOM-2026',
-    },
-    {
-      badge: 'Kado Spesial #3',
+      badge: 'Kado Berkah #3',
       emoji: '🎟️',
-      title: 'Voucher Bahagia Tanpa Syarat',
-      desc: 'Voucher ini berlaku seumur hidup untuk Mba Kei: hak penuh untuk istirahat saat lelah, tertawa lepas, dan menikmati me-time kapan pun dibutuhkan!',
-      code: 'UNLIMITED-JOY-PASS',
+      title: 'Voucher Rezeki Melimpah & Halal',
+      desc: 'Voucher doa abadi: semoga pintu rezeki Mba Kei mengalir deras dari arah yang tak disangka-sangka, berkah buat keluarga, dan bermanfaat buat sesama!',
+      code: 'UNLIMITED-BARAKAH-2026',
     },
     {
-      badge: 'Kado Spesial #4',
-      emoji: '🔮',
-      title: 'Ramalan Bintang Mba Kei 2026–2027',
-      desc: 'Prediksi semesta untuk Mba Kei: akan ada kabar gembira besar, pencapaian yang membanggakan, dan kejutan manis yang datang bertubi-tubi di usia baru ini!',
-      code: 'STARLIGHT-DESTINY-0711',
+      badge: 'Kado Selebrasi #4',
+      emoji: '💐',
+      title: 'Buket Bunga Abadi Kelulusan',
+      desc: 'Buket bunga virtual yang gak akan pernah layu—sebagai simbol doa tulus dan rasa bangga dari semua orang yang sayang sama Mba Kei.',
+      code: 'ETERNAL-BLOOM-GRAD',
     },
     {
-      badge: 'Kado Spesial #5',
+      badge: 'Kado Semangat #5',
       emoji: '✈️',
-      title: 'Tiket Petualangan & Liburan Impian',
-      desc: 'Semoga semua destinasi impian yang ada di bucket list Mba Kei segera terwujud satu per satu bersama orang-orang tersayang!',
-      code: 'DREAM-VOYAGE-KEI',
+      title: 'Paspor Petualangan Dunia & Akhirat',
+      desc: 'Semoga semua mimpi jalan-jalan, liburan, dan cita-cita besar Mba Kei segera terwujud, sambil terus menjaga bekal terbaik menuju surga-Nya!',
+      code: 'DUNIA-AKHIRAT-JUARA',
     },
     {
-      badge: 'Kado Spesial #6',
+      badge: 'Kado Apresiasi #6',
       emoji: '🏆',
-      title: 'Piala Apresiasi Terbaik',
-      desc: 'Penghargaan tertinggi untuk Mba Kei karena sudah bertahan, bertumbuh, dan melewati setahun terakhir dengan sangat hebat. Kami bangga padamu!',
+      title: 'Piala Sosok Paling Luar Biasa',
+      desc: 'Selamat ulang tahun 7 November 2026! Terima kasih sudah bertahan, bertumbuh, dan selalu jadi pribadi yang hangat. We are so proud of you!',
       code: 'BEST-SOUL-AWARD-2026',
     },
   ];
@@ -839,14 +948,14 @@
     launchFireworksShow();
   });
 
-  // Wish Jar & Fortune Cookie
+  // Wish Jar & Fortune Cookie (Reflective & Encouraging)
   const fortunes = [
-    '🌟 “Langkah kecil yang Mba Kei ambil hari ini akan membawa keajaiban besar di tahun 2026–2027.”',
-    '🥠 “Keberuntungan sedang jatuh cinta pada senyuman Mba Kei. Bersiaplah menerima kabar baik minggu ini!”',
-    '🌸 “Doa yang Mba Kei langitkan diam-diam sedang dirangkai semesta menjadi kenyataan yang indah.”',
-    '💖 “Kesehatan, kedamaian hati, dan rezeki yang mengalir deras akan selalu menyertai Mba Kei.”',
-    '✨ “Di usia baru ini, Mba Kei akan dikelilingi oleh peluang emas dan orang-orang yang tulus mendukungmu.”',
-    '🎂 “7 November 2026 menandai dimulainya babak paling bahagia dalam perjalanan hidup Mba Kei!”'
+    '🤍 “Fa inna ma\'al-\'usri yusra. Ingat Mba Kei, kesulitan itu cuma sementara, jalan kemudahannya udah disiapin Allah di saat yang sama!”',
+    '💪 “Mba Kei itu orang yang super rajin dan sabar banget. Di kondisi apa pun, tetap semangat ya! Usahamu gak akan sia-sia!”',
+    '🎓 “Selamat wisuda Mba Kei! Gelar baru ini bukti nyata ketekunanmu. Sukses berkarier dan terus melangkah maju!”',
+    '🤲 “Kejarlah impian duniamu setinggi bintang, dan jangan pernah lupa perbanyak bekal buat akhiratmu.”',
+    '🌸 “Doa-doa yang Mba Kei bisikkan dalam sujud sedang dirangkai semesta jadi takdir yang paling indah.”',
+    '🎂 “7 November 2026: Dobel momen wisuda dan ultah yang dirayakan se-unik mungkin. You deserve all this joy!”'
   ];
   let fortuneIndex = 0;
   const fortuneOutput = document.getElementById('fortune-output');
@@ -870,7 +979,7 @@
   document.getElementById('cookie-crack-btn')?.addEventListener('click', () => drawFortune('🥠'));
 
   /* ==========================================================================
-     11. INTERACTIVE KALIMBA & AUTO-PLAY HAPPY BIRTHDAY MELODY
+     12. INTERACTIVE KALIMBA & AUTO-PLAY CELEBRATION MELODY
      ========================================================================== */
   const noteDisplay = document.getElementById('note-display');
   const kalimbaButtons = document.querySelectorAll('.k-key');
@@ -886,7 +995,7 @@
       setTimeout(() => btn.classList.remove('active'), 180);
 
       if (noteDisplay) {
-        noteDisplay.textContent = `🎶 Nada ${label} (${note}) — Merdu sekali, Mba Kei!`;
+        noteDisplay.textContent = `🎶 Nada ${label} (${note}) — Merdu banget, Mba Kei!`;
       }
 
       const rect = btn.getBoundingClientRect();
@@ -905,7 +1014,7 @@
     }
   });
 
-  // Happy Birthday Song Sequencer
+  // Celebration Song Sequencer (Happy Birthday + Wisuda Anthem)
   let isPlayingSong = false;
   let songTimeouts = [];
   const autoplayBtn = document.getElementById('autoplay-song-btn');
@@ -913,43 +1022,42 @@
   const bgmToggleBtn = document.getElementById('bgm-toggle-btn');
   const bgmIcon = document.getElementById('bgm-icon');
 
-  // Happy Birthday melody in C major
-  const birthdayMelody = [
+  const celebrationMelody = [
     { note: 'C4', f: 261.63, d: 300, lyric: 'Hap-' },
     { note: 'C4', f: 261.63, d: 250, lyric: 'py' },
     { note: 'D4', f: 293.66, d: 500, lyric: 'Birth-' },
     { note: 'C4', f: 261.63, d: 500, lyric: 'day' },
-    { note: 'F4', f: 349.23, d: 500, lyric: 'Mba' },
-    { note: 'E4', f: 329.63, d: 900, lyric: 'Kei! ✨' },
+    { note: 'F4', f: 349.23, d: 500, lyric: '&amp;' },
+    { note: 'E4', f: 329.63, d: 900, lyric: 'Wisuda! 🎓' },
 
     { note: 'C4', f: 261.63, d: 300, lyric: 'Hap-' },
     { note: 'C4', f: 261.63, d: 250, lyric: 'py' },
-    { note: 'D4', f: 293.66, d: 500, lyric: 'Birth-' },
-    { note: 'C4', f: 261.63, d: 500, lyric: 'day' },
-    { note: 'G4', f: 392.00, d: 500, lyric: 'to' },
-    { note: 'F4', f: 349.23, d: 900, lyric: 'You! 🎂' },
+    { note: 'D4', f: 293.66, d: 500, lyric: 'Mile-' },
+    { note: 'C4', f: 261.63, d: 500, lyric: 'stone' },
+    { note: 'G4', f: 392.00, d: 500, lyric: 'Mba' },
+    { note: 'F4', f: 349.23, d: 900, lyric: 'Kei! 🎂' },
 
     { note: 'C4', f: 261.63, d: 300, lyric: 'Hap-' },
     { note: 'C4', f: 261.63, d: 250, lyric: 'py' },
-    { note: 'C5', f: 523.25, d: 500, lyric: 'Birth-' },
-    { note: 'A4', f: 440.00, d: 500, lyric: 'day' },
-    { note: 'F4', f: 349.23, d: 500, lyric: 'Dear' },
-    { note: 'E4', f: 329.63, d: 500, lyric: 'Mba' },
+    { note: 'C5', f: 523.25, d: 500, lyric: 'Gra-' },
+    { note: 'A4', f: 440.00, d: 500, lyric: 'dua-' },
+    { note: 'F4', f: 349.23, d: 500, lyric: 'tion' },
+    { note: 'E4', f: 329.63, d: 500, lyric: 'Dear' },
     { note: 'D4', f: 293.66, d: 850, lyric: 'Kei... 💖' },
 
     { note: 'B4', f: 466.16, d: 300, lyric: 'Hap-' },
     { note: 'B4', f: 466.16, d: 250, lyric: 'py' },
-    { note: 'A4', f: 440.00, d: 500, lyric: 'Birth-' },
-    { note: 'F4', f: 349.23, d: 500, lyric: 'day' },
-    { note: 'G4', f: 392.00, d: 500, lyric: '7 Nov' },
-    { note: 'F4', f: 349.23, d: 1000, lyric: '2026! 🎉' },
+    { note: 'A4', f: 440.00, d: 500, lyric: '7 Nov' },
+    { note: 'F4', f: 349.23, d: 500, lyric: '2026' },
+    { note: 'G4', f: 392.00, d: 500, lyric: 'To' },
+    { note: 'F4', f: 349.23, d: 1000, lyric: 'You! 🎉' },
   ];
 
   function stopBirthdaySong() {
     songTimeouts.forEach((t) => clearTimeout(t));
     songTimeouts = [];
     isPlayingSong = false;
-    if (autoplayLabel) autoplayLabel.textContent = 'Mainkan Lagu "Happy Birthday Mba Kei"';
+    if (autoplayLabel) autoplayLabel.textContent = 'Mainkan Lagu "Happy Milestone Mba Kei"';
     if (bgmToggleBtn) bgmToggleBtn.setAttribute('aria-pressed', 'false');
     if (bgmIcon) bgmIcon.textContent = '🔇';
   }
@@ -961,17 +1069,17 @@
     }
     isPlayingSong = true;
     completeQuest('music');
-    if (autoplayLabel) autoplayLabel.textContent = '⏹️ Hentikan Lagu';
+    if (autoplayLabel) autoplayLabel.textContent = '⏹️ Hentikan Musik';
     if (bgmToggleBtn) bgmToggleBtn.setAttribute('aria-pressed', 'true');
     if (bgmIcon) bgmIcon.textContent = '🔊';
 
     let elapsed = 0;
-    birthdayMelody.forEach((step) => {
+    celebrationMelody.forEach((step) => {
       const tid = setTimeout(() => {
         if (!isPlayingSong) return;
         playTone(step.f, (step.d / 1000) * 0.95, 'triangle', 0.16);
         if (noteDisplay) {
-          noteDisplay.textContent = `🎵 Menyanyikan: “${step.lyric}” (${step.note})`;
+          noteDisplay.innerHTML = `🎵 Menyanyikan: “${step.lyric}” (${step.note})`;
         }
         const matchingKey = document.querySelector(`.k-key[data-note="${step.note}"]`);
         if (matchingKey) {
@@ -987,7 +1095,7 @@
       stopBirthdaySong();
       launchSideCannons();
       if (noteDisplay) {
-        noteDisplay.textContent = '🎉 Selamat Ulang Tahun, Mba Kei! (Klik lagi untuk memutar ulang)';
+        noteDisplay.textContent = '🎉 Selamat Wisuda & Ultah, Mba Kei! (Klik buat muter lagi)';
       }
     }, elapsed + 100);
     songTimeouts.push(endTid);
@@ -997,7 +1105,7 @@
   bgmToggleBtn?.addEventListener('click', playBirthdaySong);
 
   /* ==========================================================================
-     12. POLAROID 3D FLIP & PERSISTENT WALL OF WISHES
+     13. POLAROID 3D FLIP & PERSISTENT WALL OF WISHES
      ========================================================================== */
   document.querySelectorAll('.polaroid-card').forEach((card) => {
     const toggleFlip = () => {
@@ -1015,18 +1123,18 @@
     });
   });
 
-  const STORAGE_KEY = 'mba_kei_wishes_2026';
+  const STORAGE_KEY = 'mba_kei_milestone_wishes_2026';
   const defaultWishes = [
     {
-      sender: 'Sahabat & Tim Terdekat',
-      badge: '👑',
-      message: 'Selamat ulang tahun Mba Kei! Semoga di tanggal 7 November 2026 ini semua hal baik datang menghampiri, sehat selalu, dan makin bahagia setiap harinya!',
+      sender: 'Sahabat Seperjuangan',
+      badge: '🎓',
+      message: 'Congrats wisudanya Mba Kei dan happy birthday 7 Nov 2026! Lu beneran orang yang paling sabar dan rajin yang pernah gua kenal. Terus gaspol kejar dunia dan akhirat ya!',
       date: '7 Nov 2026',
     },
     {
-      sender: 'Secret Admirer Semesta',
-      badge: '🌸',
-      message: 'Terima kasih sudah selalu menebarkan senyum dan kebaikan. Semoga tahun ini jadi tahun paling berkesan untuk Mba Kei!',
+      sender: 'Keluarga & Support System',
+      badge: '🤲',
+      message: 'Bangga banget sama Mba Kei! Semoga ilmu yang didapat berkah, karier lancar, dan tetap rendah hati serta istiqomah di jalan Allah. Fa inna ma\'al-\'usri yusra!',
       date: '7 Nov 2026',
     },
   ];
@@ -1084,7 +1192,7 @@
     const msgInput = document.getElementById('wish-message');
 
     const sender = senderInput?.value.trim() || 'Sahabat Mba Kei';
-    const badge = badgeInput?.value || '💖';
+    const badge = badgeInput?.value || '🎓';
     const message = msgInput?.value.trim();
     if (!message) return;
 
@@ -1097,9 +1205,9 @@
     });
 
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(current.slice(0, 12)));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(current.slice(0, 15)));
     } catch {
-      // Ignore storage quota errors
+      // Ignore quota
     }
 
     renderWishes();
@@ -1108,7 +1216,7 @@
   });
 
   /* ==========================================================================
-     13. DOCK CONTROLS & THEME SWITCHER
+     14. DOCK CONTROLS & THEME SWITCHER
      ========================================================================== */
   document.getElementById('dock-cannon-btn')?.addEventListener('click', () => {
     launchSideCannons();
@@ -1153,4 +1261,3 @@
     }, 350);
   });
 })();
-

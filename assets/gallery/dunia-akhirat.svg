@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="60%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#4c1d95" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" rx="36" fill="url(#grad4)"/>
+  <!-- Crescent Moon and Stars -->
+  <g transform="translate(300, 260)">
+    <path d="M-10,-90 C45,-90 90,-45 90,10 C90,65 45,110 -10,110 C25,85 45,45 45,10 C45,-25 25,-65 -10,-90 Z" fill="#fde047"/>
+    <circle cx="-50" cy="-30" r="7" fill="#ffffff" opacity="0.9"/>
+    <circle cx="70" cy="-60" r="5" fill="#fef08a" opacity="0.9"/>
+    <circle cx="-65" cy="50" r="6" fill="#fef08a" opacity="0.8"/>
+    <!-- Lantern -->
+    <rect x="-85" y="-10" width="30" height="42" rx="6" fill="#f59e0b" stroke="#fde047" stroke-width="2"/>
+    <path d="M-70,-22 L-70,-10" stroke="#fde047" stroke-width="3"/>
+  </g>
+  <text x="300" y="475" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="26" fill="#ffffff" text-anchor="middle">DUNIA &amp; AKHIRAT SEIMBANG</text>
+  <text x="300" y="515" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="19" fill="#e9d5ff" text-anchor="middle">Sukses di Bumi, Mulia di Langit 🤲🌙</text>
+</svg>
